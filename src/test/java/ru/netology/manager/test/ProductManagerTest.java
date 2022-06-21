@@ -30,11 +30,10 @@ public class ProductManagerTest {
         manager.removeById(2);
         manager.findAll();
 
-        Product[] actual = manager.searchBy("Во"); //поиск по тексту :
-        Product[] expected = {book1};
+        Product[] actual = manager.searchBy("В");
+        Product[] expected = {book1, book2};
         Assertions.assertArrayEquals(expected, actual);
     }
-
     @Test
     public void matchesTest() {
         ProductRepository repo = new ProductRepository();
@@ -47,8 +46,9 @@ public class ProductManagerTest {
         manager.add(book3);
 
 
-        Product[] actual = manager.searchBy("Ви");
-        Product[] expected = {book2};
+
+        Product[] actual = manager.searchBy("Si");
+        Product[] expected = {};
         Assertions.assertArrayEquals(expected, actual);
     }
 
@@ -62,19 +62,17 @@ public class ProductManagerTest {
         manager.add(phone3);
         manager.add(book2);
         manager.add(book3);
-
         Product[] actual = manager.searchBy("10");
-        Product[] expected = {phone3};
+        Product[] expected = { phone3 };
         Assertions.assertArrayEquals(expected, actual);
 
         ProductRepository repo1 = new ProductRepository();
         ProductManager manager1 = new ProductManager(repo1);
 
-        Product[] actual1 = manager1.searchBy("Во");
+        Product[] actual1 = manager1.searchBy("В");
         Product[] expected1 = {};
         Assertions.assertArrayEquals(expected, actual);
 
     }
 }
-
 
